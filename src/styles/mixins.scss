@@ -1,0 +1,4 @@
+@mixin setFlex($f-d: row) {
+    display: flex;
+    flex-direction: $f-d;
+}

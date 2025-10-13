@@ -1,0 +1,48 @@
+@use '../../styles/mixins.scss';
+
+.header-of-div {
+    height: 8%;
+    width: 100%;
+    @include mixins.setFlex();
+    justify-content: space-between; 
+    align-items: center; 
+
+    > :nth-child(1) {
+        height: 100%;
+        width: fit-content;
+        @include mixins.setFlex();
+        align-items: center;
+
+        img {
+            height: 80%;
+            width: auto;
+        }
+
+        h1 {
+            color: rgb(20, 34, 95);
+        }
+    }
+
+    > :nth-child(2) {
+        @include mixins.setFlex();
+        justify-content: space-evenly;
+        gap: 25px;
+
+        font-size: large;
+        color:rgb(20, 34, 95);
+
+        cursor: pointer;
+    }
+
+    > :nth-child(3) {
+        margin-right: 35px;
+        padding: 7px;
+        border-radius: 25px;
+
+        width: fit-content; 
+        background-color: rgb(57, 57, 136);
+        color: white;
+
+        cursor: pointer;
+    }
+}
