@@ -1,31 +1,98 @@
-@use './mixins.scss';
+@use "./mixins.scss" as *;
+
+:root {
+  --bg: #f7f2ec;
+  --ink: #1d1a16;
+  --muted: #6a6057;
+  --accent: #1f8a87;
+  --accent-dark: #0f5b5a;
+  --accent-soft: #d7f2ec;
+  --sun: #f4b186;
+  --sand: #f6e7d8;
+  --card: #ffffff;
+  --line: rgba(29, 26, 22, 0.12);
+  --shadow: 0 20px 60px rgba(29, 26, 22, 0.12);
+}
 
 * {
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    box-sizing: border-box;
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 10% 10%, #fff6ee 0%, transparent 45%),
+    radial-gradient(circle at 90% 0%, #e6f8f5 0%, transparent 45%),
+    linear-gradient(180deg, #f8f1e8 0%, #f4eee6 40%, #f7f2ec 100%);
+  min-height: 100vh;
+}
 
-    @include mixins.setFlex();
-    justify-content: center;
-    align-items: center;
+.app {
+  min-height: 100vh;
+}
 
-    height: 100vh;
-    width: 100vw;
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    overflow: hidden;
+img {
+  max-width: 100%;
+  display: block;
+}
 
-    background-image: url('../images/i.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
+button,
+input {
+  font-family: inherit;
+}
 
-    #root {
-        height: 75vh;
-        width: 75vw;
+.container {
+  width: min(1160px, 92vw);
+  margin: 0 auto;
+}
 
-        background-color: white;   
-        border-radius: 25px;    
-    }
+.section-title {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: -0.02em;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: reveal 0.8s ease forwards;
+  animation-delay: var(--delay, 0.08s);
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@include bp(md) {
+  .container {
+    width: min(960px, 92vw);
+  }
+}
+
+@include bp(sm) {
+  .container {
+    width: min(640px, 92vw);
+  }
 }

@@ -1,17 +1,11 @@
-import type { FC } from "react";
-import './styles/app.scss'
-import Header from "./components/header-md/header";
-import Title from "./components/title-md/title";
-import Slides from "./components/slides-md/slides";
+import { Header } from "./components/header-md/header";
+import { Slides } from "./components/slides-md/slides";
 
-const App: FC = () => {
+export default function App() {
   return (
-    <>
+    <div className="app">
       <Header />
-      <Title />
       <Slides />
-    </>
-  )
+    </div>
+  );
 }
-
-export default App

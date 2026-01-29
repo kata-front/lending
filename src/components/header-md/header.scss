@@ -1,48 +1,82 @@
-@use '../../styles/mixins.scss';
+@use "../../styles/mixins.scss" as *;
 
-.header-of-div {
-    height: 8%;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(12px);
+  background: rgba(247, 242, 236, 0.82);
+  border-bottom: 1px solid var(--line);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 18px 0;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 700;
+}
+
+.logo__mark {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+
+.logo__sub {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.nav {
+  display: flex;
+  gap: 18px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.nav a {
+  transition: color 0.2s ease;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.phone {
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+
+@include bp(md) {
+  .nav {
+    display: none;
+  }
+}
+
+@include bp(sm) {
+  .header__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header__actions {
     width: 100%;
-    @include mixins.setFlex();
-    justify-content: space-between; 
-    align-items: center; 
-
-    > :nth-child(1) {
-        height: 100%;
-        width: fit-content;
-        @include mixins.setFlex();
-        align-items: center;
-
-        img {
-            height: 80%;
-            width: auto;
-        }
-
-        h1 {
-            color: rgb(20, 34, 95);
-        }
-    }
-
-    > :nth-child(2) {
-        @include mixins.setFlex();
-        justify-content: space-evenly;
-        gap: 25px;
-
-        font-size: large;
-        color:rgb(20, 34, 95);
-
-        cursor: pointer;
-    }
-
-    > :nth-child(3) {
-        margin-right: 35px;
-        padding: 7px;
-        border-radius: 25px;
-
-        width: fit-content; 
-        background-color: rgb(57, 57, 136);
-        color: white;
-
-        cursor: pointer;
-    }
+    justify-content: space-between;
+  }
 }

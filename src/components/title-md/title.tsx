@@ -1,23 +1,18 @@
-import type { FC } from "react";
-import './title.scss'
+import "./title.scss";
 
-const Title: FC = () => {
-    return (
-        <div className="title-md">
-            <div>
-                <span>Frontend</span>
-                <span id="h">Tech <br />Conference</span>
-                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                </span>
-                <span id="btn-1" className="btn">Join</span>
-            </div>
-            <div>
-                <span id="h2">Dive into the world<br />of frontend development</span>
-                <span>Specifically, you will learn to create simple projects from scratch and bring them to completion.</span>
-                <span id="btn-2" className="btn">Ask question</span>
-            </div>
-        </div>
-    )
+type TitleProps = {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: "left" | "center";
+};
+
+export function Title({ eyebrow, title, subtitle, align = "left" }: TitleProps) {
+  return (
+    <div className={`title-block title-block--${align}`}>
+      {eyebrow ? <span className="title-block__eyebrow">{eyebrow}</span> : null}
+      <h2 className="title-block__title">{title}</h2>
+      {subtitle ? <p className="title-block__subtitle">{subtitle}</p> : null}
+    </div>
+  );
 }
-
-export default Title
