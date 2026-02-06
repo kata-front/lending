@@ -88,6 +88,8 @@ export function Slides() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<FormState>("idle");
+  const isLoading = status === "loading";
+  const isError = status === "error";
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -285,14 +287,18 @@ export function Slides() {
               <span>Гарантия на работы</span>
             </div>
           </div>
-          <form className="cta__form" onSubmit={handleSubmit}>
+          <form className="cta__form" onSubmit={handleSubmit} aria-busy={isLoading}>
             <label>
               Имя
               <input
                 type="text"
+                name="name"
                 placeholder="Например, Анна"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
+                autoComplete="name"
+                aria-invalid={isError}
+                aria-describedby="cta-status"
                 required
               />
             </label>
@@ -300,17 +306,26 @@ export function Slides() {
               Телефон
               <input
                 type="tel"
+                name="phone"
                 placeholder="+7 (___) ___-__-__"
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
                 inputMode="tel"
+                autoComplete="tel"
+                aria-invalid={isError}
+                aria-describedby="cta-status"
                 required
               />
             </label>
-            <button className="btn btn--solid" type="submit" disabled={status === "loading"}>
-              {status === "loading" ? "Отправляем..." : "Отправить заявку"}
+            <button className="btn btn--solid" type="submit" disabled={isLoading}>
+              {isLoading ? "Отправляем..." : "Отправить заявку"}
             </button>
-            <p className={`form-status form-status--${status}`}>
+            <p
+              id="cta-status"
+              className={`form-status form-status--${status}`}
+              role="status"
+              aria-live="polite"
+            >
               {status === "success" && "Спасибо! Мы уже готовим для вас удобное время."}
               {status === "error" && "Пожалуйста, заполните оба поля или попробуйте позже."}
               {status === "idle" && "Нажимая кнопку, вы соглашаетесь с политикой обработки данных."}

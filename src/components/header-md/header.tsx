@@ -8,7 +8,7 @@ export function Header() {
           <span className="logo__mark">Smile</span>
           <span className="logo__sub">Стоматология</span>
         </a>
-        <nav className="nav">
+        <nav className="nav" aria-label="Основная навигация">
           <a href="#services">Услуги</a>
           <a href="#why">Почему мы</a>
           <a href="#reviews">Отзывы</a>
