@@ -14,9 +14,9 @@
 
 **Запуск**
 1. `npm install`
-2. Терминал 1: `npm run server`
-3. Терминал 2: `npm run dev`
-4. Откройте `http://localhost:5173`
+2. `npm run build`
+3. `npm run server`
+4. Откройте `http://localhost:3001`
 
 **API**
 - `GET /api/health` — проверка сервера
@@ -27,6 +27,14 @@
 - `src/components` — блоки лендинга
 - `src/styles` — токены и миксины
 - `server/index.js` — API для формы
+
+**Сборка**
+- Сборка идет через `scripts/build.mjs` (TypeScript + Sass).
+- Для запуска в браузере используется import map с CDN-версией React.
+
+**Netlify**
+- Форма настроена как Netlify Forms (`appointment`).
+- В `netlify.toml` указан `publish = "dist"` и `command = "npm run build"`.
 
 **Примечания**
 - Заявки хранятся в памяти процесса. Для продакшена нужна БД или внешний сервис.

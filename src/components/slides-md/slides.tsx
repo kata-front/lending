@@ -90,6 +90,35 @@ export function Slides() {
   const [status, setStatus] = useState<FormState>("idle");
   const isLoading = status === "loading";
   const isError = status === "error";
+  const isLocalHost =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
+
+  const submitLead = async (payload: { name: string; phone: string }) => {
+    if (isLocalHost) {
+      return fetch("/api/lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+    }
+
+    const formBody = new URLSearchParams({
+      "form-name": "appointment",
+      name: payload.name,
+      phone: payload.phone
+    }).toString();
+
+    return fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: formBody
+    });
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -100,13 +129,7 @@ export function Slides() {
 
     try {
       setStatus("loading");
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, phone })
-      });
+      const response = await submitLead({ name: name.trim(), phone: phone.trim() });
 
       if (!response.ok) {
         throw new Error("Request failed");
@@ -287,7 +310,20 @@ export function Slides() {
               <span>Гарантия на работы</span>
             </div>
           </div>
-          <form className="cta__form" onSubmit={handleSubmit} aria-busy={isLoading}>
+          <form
+            className="cta__form"
+            name="appointment"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+            aria-busy={isLoading}
+          >
+            <input type="hidden" name="form-name" value="appointment" />
+            <label style={{ display: "none" }}>
+              Не заполнять
+              <input name="bot-field" />
+            </label>
             <label>
               Имя
               <input

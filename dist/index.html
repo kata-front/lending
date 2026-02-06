@@ -11,6 +11,16 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/assets/app.css" />
+    <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.3.1",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime"
+    }
+  }
+</script>
   </head>
   <body>
     <form name="appointment" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
@@ -20,6 +30,6 @@
       <input type="text" name="bot-field" />
     </form>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>
